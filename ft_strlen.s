@@ -6,7 +6,7 @@
 #    By: smatha <smatha@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/10/03 14:30:56 by smatha            #+#    #+#              #
-#    Updated: 2020/10/04 23:46:31 by smatha           ###   ########.fr        #
+#    Updated: 2020/10/05 00:17:17 by smatha           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,3 +96,18 @@ syscall
 
 section .text
 	global _ft_strlen
+
+; ft_strlen(arg0 = rdi = char *s)
+
+_ft_strlen:
+	mov 	rax, 0
+	jmp 	count
+
+count:
+	cmp 	BYTE [rdi + rax], 0 	; if the byte at rdi(arg0 = string) start + rax (count/return value) equal 0
+	je 		exit					; so exit and return rax
+	inc	 	rax						; increment rax ( = rax++ )
+	jmp 	count
+
+exit:
+	ret
