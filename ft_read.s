@@ -1,14 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    ft_read.s                                          :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: smatha <smatha@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/10/03 14:32:20 by smatha            #+#    #+#              #
-#    Updated: 2020/10/04 21:26:52 by smatha           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
 ;Системный вызов read() читает данные как последовательность байт, без какой-либо интерпретации
 ;ssize_t read (int fd, void * buffer, size_t count)
@@ -20,3 +9,10 @@
 
 section .text
 	global _ft_read
+
+; delete all unpreserved registers by _read
+
+_ft_read:								; fd = rdi, buffer = rsi, bytes = rdx
+	mov		rax, 0x2000003
+	syscall
+	ret
