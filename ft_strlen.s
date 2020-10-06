@@ -1,15 +1,6 @@
 
 ;вычисляет длину строки до '\0', возвращет счетчик
 
-;EAX/AX/AH/AL (accumulator register) – аккумулятор
-;EBX/BX/BH/BL (base register) –регистр базы
-;ECX/CX/CH/CL (counter register) – счётчик
-;EDX/DX/DH/DL (data register) – регистр данных
-;ESI/SI (source index register) – индекс источника
-;EDI/DI (destination index register) – индекс приёмника (получателя)
-;ESP/SP (stack pointer register) – регистр указателя стека
-;EBP/BP (base pointer register) – регистр указателя базы кадра стека
-
 ; 64-bit [QWORD]
 R0  R1  R2  R3  R4  R5  R6  R7  R8  R9  R10  R11  R12  R13  R14  R15
 RAX RCX RDX RBX RSP RBP RSI RDI
@@ -86,7 +77,7 @@ syscall
 section .text
 	global _ft_strlen
 
-; ft_strlen(arg0 = rdi = char *s)
+; (arg0 = rdi = char *s)
 
 _ft_strlen:
 	mov 	rax, 0
@@ -94,8 +85,8 @@ _ft_strlen:
 
 count:
 	cmp 	BYTE [rdi + rax], 0 	; if the byte at rdi(arg0 = string) start + rax (count/return value) equal 0
-	je 		exit					; so exit and return rax
-	inc	 	rax						; increment rax ( = rax++ )
+	je 		exit
+	inc	 	rax						; rax++
 	jmp 	count
 
 exit:
