@@ -20,60 +20,6 @@ AL  CL  DL  BL  SPL BPL SIL DIL
 ; 128-bit (used for floating point operations mostly)
 XMM0 ... XMM15
 
-; Save register
-push	REG
-pop		REG
-
-; Set register value
-mov		REG, VALUE	; DEST = VALUE
-
-; Common operations
-add		DEST, VALUE	; DEST = DEST + VALUE
-sub		-			; DEST = DEST - VALUE
-inc		REG			; REG++
-dec		-			; REG--
-and		DEST, REG	; DEST = DEST & REG
-xor		-			; DEST = DEST ^ REG
-xor		REG, REG	; = mov	REG, 0
-mul		REG			; REG = REG * RAX
-div		REG			; REG = REG / RAX
-
-; Dereferenced value
-		[REG]		; = *REG
-
-; Compare
-cmp	REG, VALUE		; Set flags used by jmp variants
-
-; Label
-label:
-		jmp	label	; next jumps depends on compare flags from cmp
-		je	-		; is equal
-		jne	-		; is not equal
-		jl	-		; < VALUE
-		jle	-		; <= VALUE
-		jz	-		; = 0
-		jnz	-		; != 0
-		jg	-		; > VALUE
-		jge	-		; >= VALUE
-
-; Function call
-call	FUNCTION
-
-; Parameters registers
-RDI RSI RDX RCX R8 R9
-
-; Register to preserve
-RBP RBX R12 R13 R14 R15	; You **MUST** push/pop them if you use them
-
-; Return register
-RAX
-
-; syscall
-mov		rax, CODE	; Then RDI, RSI etc.. for params
-					; Add 0x2000000 to the syscall number, see table below
-syscall
-
-
 section .text
 	global _ft_strlen
 
