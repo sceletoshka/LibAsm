@@ -18,7 +18,7 @@ compa:
 	cmp		bl, 0			; if we are not at the end of rdi (arg1)
 	je		exit
 	cmp 	al, bl			; compare al and bl
-	jne 	exit			; if the result of cmp is diferrent than 0 so the string are differents
+	jne 	exit
 	inc 	rdi				; increment the rdi pointer
 	inc 	rsi				; increment the rsi pointer
 	jmp 	compa
@@ -26,5 +26,5 @@ compa:
 exit:
 	movzx	rax, al			; movzx = copy a register of inferior size in a bigger and fill the other bits with 0, and this register is rax
     movzx	rbx, bl			; same that previous but set it in rbx
-    sub		rax, rbx		; stock the difference of rax and rbx in rax; Finaly : do the difference beetween the char at the rdi pointer and the char at the rsi pointer
+    sub		rax, rbx		; Finaly : do the difference beetween the char at the rdi pointer and the char at the rsi pointer
 	ret

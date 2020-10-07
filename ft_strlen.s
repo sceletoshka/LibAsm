@@ -32,7 +32,7 @@ _ft_strlen:
 count:
 	cmp 	BYTE [rdi + rax], 0 	; if the byte at rdi(arg0 = string) start + rax (count/return value) equal 0
 	je 		exit
-	inc	 	rax						; rax++
+	inc	 	rax
 	jmp 	count
 
 exit:

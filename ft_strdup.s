@@ -6,4 +6,7 @@ section .text
 	extern _malloc
 
 _ft_strdup:
-	
+
+
+exit:
+	ret
