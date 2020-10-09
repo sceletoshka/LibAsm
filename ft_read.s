@@ -15,4 +15,12 @@ section .text
 _ft_read:								; fd = rdi, buffer = rsi, bytes = rdx
 	mov		rax, 0x2000003
 	syscall
+			jc exit_error		; if doesn't work, read set flags carry to 1 so jmp exit error
+	jmp exit
+
+exit_error:
+	mov 	rax, -1			; set return to -1s
+	ret
+	
+exit:
 	ret
