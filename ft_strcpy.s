@@ -5,15 +5,27 @@
 ;char *strcpy(char *dest, const char *src);
 ;Net zashiti ot perepolneniya
 
-section .text
-	global _ft_strcpy
+section	.text
+			global	_ft_strcpy
 
-_ft_strcpy:
-	mov rax, 0
-	jmp count
+; delete RDX, RCX, RAX
 
-count:
+_ft_strcpy:									; dst = rdi, src = rsi
+			xor		rcx, rcx				; i = 0
+			xor		rdx, rdx				; tmp = 0
+			cmp		rsi, 0					; !rsi
+			jz		return
+			jmp		copy
 
+increment:
+			inc		rcx
 
-exit:
-	ret
+copy:
+			mov		dl, BYTE [rsi + rcx]
+			mov		BYTE [rdi + rcx], dl
+			cmp		dl, 0
+			jnz		increment
+			
+return:
+			mov		rax, rdi				; return dst
+			ret
