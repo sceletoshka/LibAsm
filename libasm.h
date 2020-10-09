@@ -6,18 +6,18 @@
 /*   By: smatha <smatha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/03 14:12:55 by smatha            #+#    #+#             */
-/*   Updated: 2020/10/04 20:42:58 by smatha           ###   ########.fr       */
+/*   Updated: 2020/10/09 14:56:31 by smatha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBASM_H
 # define LIBASM_H
 
-#include <stdio.h>
-#include <string.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
+# include <stdio.h>
+# include <string.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdlib.h>
 
 size_t		ft_strlen(const char *str);
 char		*ft_strcpy(char *dest, const char *s);
