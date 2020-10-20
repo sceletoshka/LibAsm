@@ -8,7 +8,7 @@ section .text
 	extern ___error
 
 _ft_strdup:									; rdi = s
-			call	_ft_strlen		; call ft_strlen to have len of malloc
+	call	_ft_strlen		; call ft_strlen to have len of malloc
 	add		rax, 1			; add one for \0
 	push	rdi				; save value of arg0 in stack
 	mov		rdi, rax		; set len at to malloc to arg0 for malloc
@@ -25,5 +25,5 @@ _error:
 	mov r9, rax
 	call ___error
 	mov [rax], r9
-	mov rax, -1
+	mov rax, 0
 	ret
