@@ -13,6 +13,7 @@ _ft_strdup:									; rdi = s
 	push	rdi				; save value of arg0 in stack
 	mov		rdi, rax		; set len at to malloc to arg0 for malloc
 	call	_malloc			; call malloc, return in rax
+	cmp		rax, 0
 		jc  _error
 	pop		r9				; get arg0 (of ft_strdup) stocked on stack
 	mov		rdi, rax		; set the string malloced in rax to arg0 for ft_strcpy
