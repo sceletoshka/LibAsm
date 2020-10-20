@@ -7,18 +7,20 @@
 
 section .text
 	global _ft_write
+	extern ___error
 
 _ft_write:
-	mov r8, rdx				; save rdx = len in r8
+	test	edi, edi
+	js		_error
 	mov rax, 0x2000004
 	syscall
-		jc exit_error		; if doesn't work, write set flags carry to 1 so jmp exit error
-	jmp exit
-
-exit_error:
-	mov rax, -1				; set return to -1
+	jc _error
 	ret
 
-exit:
-	mov rax, r8				; set previous value of rdx save in r8, in return value
+_error:
+	push rax
+	call ___error
+	pop rdx
+	mov [rax], rdx
+	mov rax, -1
 	ret

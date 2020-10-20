@@ -1,4 +1,3 @@
-
 ; Эта функция сравнивает символы двух строк, string1 и string2.
 ;Начиная с первых символов функция strcmp сравнивает поочередно каждую пару символов,
 ;пока не будут найдены различные символы или не будет достигнут конец строки.
@@ -19,12 +18,12 @@ compa:
 	je		exit
 	cmp 	al, bl			; compare al and bl
 	jne 	exit
-	inc 	rdi				; increment the rdi pointer
-	inc 	rsi				; increment the rsi pointer
+	inc 	rdi
+	inc 	rsi
 	jmp 	compa
 
 exit:
-	movzx	rax, al			; movzx = copy a register of inferior size in a bigger and fill the other bits with 0, and this register is rax
-    movzx	rbx, bl			; same that previous but set it in rbx
-    sub		rax, rbx		; Finaly : do the difference beetween the char at the rdi pointer and the char at the rsi pointer
+	movzx	rax, al
+    movzx	rbx, bl
+    sub		rax, rbx
 	ret
