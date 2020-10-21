@@ -1,15 +1,14 @@
-;Функция strcpy() копирует строку, на которую указывает src (включая завершающий символ `\0'),
+;Функция strcpy() копирует строку, на которую указывает s (включая завершающий символ `\0'),
 ;в массив, на который указывает dest. Строки не могут перекрываться,
 ;и в результирующей строке dest должно быть достаточно места для копии.
-;char *strcpy(char *dest, const char *src);
-;Net zashiti ot perepolneniya
+;char *strcpy(char *dest, const char *s);
 
 section	.text
 			global	_ft_strcpy
 
 ; RDX, RCX, RAX
 
-_ft_strcpy:									; dst = rdi, src = rsi
+_ft_strcpy:									; dst = rdi, s = rsi
 			xor		rcx, rcx				; i = 0
 			xor		rdx, rdx				; tmp = 0
 			cmp		rsi, 0					; !rsi
