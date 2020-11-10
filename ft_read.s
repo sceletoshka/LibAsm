@@ -20,7 +20,7 @@ _ft_read:								; fd = rdi, buffer = rsi, bytes = rdx
 _error:
 	mov r15, rax
 	call ___error
-	mov [rax], r15
+	mov [rax], r15 						; передаём по адресу значение сисколл
 	mov rax, -1
 	ret
 	
