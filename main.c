@@ -6,265 +6,218 @@
 /*   By: smatha <smatha@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/09 14:19:20 by smatha            #+#    #+#             */
-/*   Updated: 2020/10/21 18:50:31 by smatha           ###   ########.fr       */
+/*   Updated: 2020/11/03 21:56:48 by smatha           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "libasm.h"
 
-void check_strlen()
-{
-	char *empty = "";
-	char *hello_world = "Hello world !";
-	char *alphabet = "abcdefghijklmnopqrstuvwxyz";
+#define FT_STR "test string test string test string test string test string"
+#define FT_LSTR FT_STR FT_STR FT_STR FT_STR FT_STR FT_STR FT_STR FT_STR FT_STR
+#define FT_LLSTR FT_LSTR FT_LSTR FT_LSTR FT_LSTR FT_LSTR FT_LSTR FT_LSTR FT_LSTR
 
-	printf("\n================================\n");
-	printf("========== FT_STRLEN ===========\n");
-	printf("================================\n\n");
-	printf("%-20s: \"%s\"\n", "char *", empty);
-	printf("%-20s: 0\n", "expected lenght");
-	printf("%-20s: %zu\n", "libc", strlen(empty));	
-	printf("%-20s: %zu\n", "libasm", ft_strlen(empty));
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char *", hello_world);
-	printf("%-20s: 0\n", "expected lenght");
-	printf("%-20s: %zu\n", "libc", strlen(hello_world));	
-	printf("%-20s: %zu\n", "libasm", ft_strlen(hello_world));
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char *", alphabet);
-	printf("%-20s: 0\n", "expected lenght");
-	printf("%-20s: %zu\n", "libc", strlen(alphabet));	
-	printf("%-20s: %zu\n", "libasm", ft_strlen(alphabet));
-	printf("\n");
-	
-	// ------- NULL = SEGFAULT
-	// printf("%-20s: \"%s\"\n", "char *", alphabet);
-	// printf("%-20s: 0\n", "expected lenght");
-	// printf("%-20s: %zu\n", "libc", strlen(NULL));	
-	// printf("%-20s: %zu\n", "libasm", ft_strlen(NULL));
-	// printf("\n");
+void	test_len()
+{
+	char *s1 = "test";
+	char *s2 = "";
+	printf("------FT_STRLEN TESTING------\n");
+	printf("string = %s\nSYS - %zu\n FT - %zu\n\n", s1, strlen(s1), ft_strlen(s1));
+	printf("string = %s\nSYS - %zu\n FT - %zu\n\n", s2, strlen(s2), ft_strlen(s2));
+	printf("string = %s\nSYS - %zu\n FT - %zu\n\n", FT_LLSTR, strlen(FT_LLSTR), ft_strlen(FT_LLSTR));
+	printf("-------------END-------------\n\n\n\n\n\n");
 }
 
-void clear_buffer(char *buffer, int size)
+void	test_cpy()
 {
-	int i = 0;
-	while (i < size)
-		buffer[i++] = 0;
+	printf("------FT_STRCPY TESTING------\n");
+	char	*src1 = "test";
+	char	*src2 = "";
+	char	*src3 = FT_LLSTR;
+	char	dst11[ft_strlen(src1) + 1];
+	char	dst12[ft_strlen(src1) + 1];
+	char	dst21[ft_strlen(src2) + 1];
+	char	dst22[ft_strlen(src2) + 1];
+	char	dst31[ft_strlen(src3) + 1];
+	char	dst32[ft_strlen(src3) + 1];
+
+	printf("orig:\n%s\n", src1);
+	printf(" SYS:\n%s\n", strcpy(dst11, src1));
+	printf("  FT:\n%s\n\n", ft_strcpy(dst12, src1));
+
+	printf("orig:\n%s\n", src2);
+	printf(" SYS:\n%s\n", strcpy(dst21, src2));
+	printf("  FT:\n%s\n\n", ft_strcpy(dst22, src2));
+
+	printf("orig:\n%s\n", src3);
+	printf(" SYS:\n%s\n", strcpy(dst31, src3));
+	printf("  FT:\n%s\n\n", ft_strcpy(dst32, src3));
+	printf("-------------END-------------\n\n\n\n\n\n");
 }
 
-void check_strcpy()
+void	test_cmp()
 {
-	char buffer[30];
-	
-	char *empty = "";
-	char *hello_world = "Hello world !";
-	char *alphabet = "abcdefghijklmnopqrstuvwxyz";
-	
-	printf("\n================================\n");
-	printf("========== FT_STRCPY ===========\n");
-	printf("================================\n\n");
-	printf("%-20s: \"%s\"\n", "char []", empty);
-	printf("%-20s: buffer[50]\n", "copy to");
-	printf("%-20s: \"%s\"\n", "libc", strcpy(buffer, empty));	
-	clear_buffer(buffer, 30);
-	printf("%-20s: \"%s\"\n", "libasm", ft_strcpy(buffer, empty));	
-	clear_buffer(buffer, 30);
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char []", hello_world);
-	printf("%-20s: buffer[50]\n", "copy to");
-	printf("%-20s: \"%s\"\n", "libc", strcpy(buffer, hello_world));	
-	clear_buffer(buffer, 30);
-	printf("%-20s: \"%s\"\n", "libasm", ft_strcpy(buffer, hello_world));	
-	clear_buffer(buffer, 30);
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char []", alphabet);
-	printf("%-20s: buffer[50]\n", "copy to");
-	printf("%-20s: \"%s\"\n", "libc", strcpy(buffer, alphabet));	
-	clear_buffer(buffer, 30);
-	printf("%-20s: \"%s\"\n", "libasm", ft_strcpy(buffer, alphabet));
-	clear_buffer(buffer, 30);
-	printf("\n");
+	printf("------FT_STRCMP TESTING------\n");
+	char	*s11 = "test";
+	char	*s12 = "test";
+	char	*s21 = "";
+	char	*s22 = "0";
+	char	*s31 = FT_LLSTR;
+	char	*s32 = FT_LLSTR "ihihihihi";
+	char	*s41 = "0";
+	char	*s42 = "";
 
-	// ------- NULL = SEGFAULT
-	// printf("%-20s: \"%s\"\n", "char []", alphabet);
-	// printf("%-20s: buffer[50]\n", "copy to");
-	// printf("%-20s: \"%s\"\n", "libc", strcpy(NULL, NULL));	
-	// clear_buffer(buffer, 30);
-	// printf("%-20s: \"%s\"\n", "libasm", ft_strcpy(NULL, NULL));
-	// clear_buffer(buffer, 30);
-	// printf("\n");
+	printf("s1:\n%s\ns2:\n%s\n", s11, s12);
+	printf(" SYS: %d\n", strcmp(s11, s12));
+	printf("  FT: %d\n\n", ft_strcmp(s11, s12));
+
+	printf("s1:\n%s\ns2:\n%s\n", s21, s22);
+	printf(" SYS: %d\n", strcmp(s21, s22));
+	printf("  FT: %d\n\n", ft_strcmp(s21, s22));
+
+	printf("s1:\n%s\ns2:\n%s\n", s31, s32);
+	printf(" SYS: %d\n", strcmp(s31, s32));
+	printf("  FT: %d\n\n", ft_strcmp(s31, s32));
+
+	printf("s1:\n%s\ns2:\n%s\n", s41, s42);
+	printf(" SYS: %d\n", strcmp(s41, s42));
+	printf("  FT: %d\n\n", ft_strcmp(s41, s42));
+	printf("-------------END-------------\n\n\n\n\n\n");
 }
 
-void check_strcmp()
+void	test_write()
 {
-	char *empty = "";
-	char *hello_world = "Hello world !";
-	char *hello_human = "Hello human !";
-	char *hello_world2 = "Hello world !";
-	
-	printf("\n================================\n");
-	printf("========== FT_STRCMP ===========\n");
-	printf("================================\n\n");
-	printf("%-20s: \"%s\"\n", "char *", hello_world);
-	printf("%-20s: \"%s\"\n", "compared to", hello_human);
-	printf("%-20s: \"%d\"\n", "libc", strcmp(hello_world, hello_human));
-	printf("%-20s: \"%d\"\n", "libasm", ft_strcmp(hello_world, hello_human));
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char *", hello_world);
-	printf("%-20s: \"%s\"\n", "compared to", hello_world2);
-	printf("%-20s: \"%d\"\n", "libc", strcmp(hello_world, hello_world2));
-	printf("%-20s: \"%d\"\n", "libasm", ft_strcmp(hello_world, hello_world2));
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char *", hello_world2);
-	printf("%-20s: \"%s\"\n", "compared to", empty);
-	printf("%-20s: \"%d\"\n", "libc", strcmp(hello_world2, empty));
-	printf("%-20s: \"%d\"\n", "libasm", ft_strcmp(hello_world2, empty));
-	printf("\n");
+	int fd1 = open("wr_test1.txt", O_WRONLY);
+	int fd2 = open("wr_test2.txt", O_WRONLY);
+	ssize_t ret;
 
-	// ------- NULL = SEGFAULT
-	// printf("%-20s: \"%s\"\n", "char *", hello_world2);
-	// printf("%-20s: %s\n", "compared to", "NULL");
-	// printf("%-20s: \"%d\"\n", "libc", strcmp(NULL, hello_world2));
-	// printf("%-20s: \"%d\"\n", "libasm", ft_strcmp(NULL, empty));
-	// printf("\n");
+	printf("------FT_WRITE TESTING------\n");
+	errno = 0;
+	ret = write(fd1, "lol", 3);
+	printf("SYS Ret: %zd, errno: %d\n", ret, errno);
+	errno = 0;
+	ret = ft_write(fd2, "lol", 3);
+	printf("FT  Ret: %zd, errno: %d\n\n", ret, errno);
+	close(fd1);
+	close(fd2);
+
+
+	errno = 0;
+	ret = write(-1, "test", 4);
+	printf("SYS Ret: %zd, errno: %d\n", ret, errno);
+	errno = 0;
+	ret = ft_write(-1, "test", 4);
+	printf("FT  Ret: %zd, errno: %d\n\n", ret, errno);
+
+
+	errno = 0;
+	ret = write(1, "test", 4);
+	printf("SYS Ret: %zd, errno: %d\n", ret, errno);
+	errno = 0;
+	ret = ft_write(1, "test", 4);
+	printf("FT  Ret: %zd, errno: %d\n", ret, errno);
+	printf("-------------END------------\n\n\n\n\n\n");
 }
 
-void check_write()
+void	test_read()
 {
-	char *hello_world = "Coucou\n";
-	char *empty = "";
+	int fd1 = open("ft_read.s", O_RDONLY);
+	int fd2 = open("ft_read.s", O_RDONLY);
+	char buf[100];
+	ssize_t ret;
 
-	printf("\n================================\n");
-	printf("========== FT_WRITE ============\n");
-	printf("================================\n\n");
-	printf("%-20s: \"%s\"\n", "char *", hello_world);
-	printf("%-20s: \"Libc:%zu\"\n", "libc", write(1, hello_world, 7));
-	// printf("\n");
-	printf("%-20s: \"Libasm:%zu\"\n", "libasm", ft_write(1, hello_world, 7));
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char *", empty);
-	printf("%-20s: \"Libc:%zu\"\n", "libc", write(1, empty, 0));
-	// printf("\n");
-	printf("%-20s: \"Libasm:%zu\"\n", "libasm", ft_write(1, empty, 0));
-	printf("\n");
-	printf("%-20s: \"%s\"\n", "char *", hello_world);
-	printf("%-20s: \"Libc:%zu\"\n", "libc", write(-7, NULL, 7));
-	// printf("\n");
-	printf("%-20s: \"Libasm:%zu\"\n", "libasm", ft_write(-7, NULL, 7));
-	// printf("\n");
-	
+
+	printf("-------FT_READ TESTING-------\n");
+	errno = 0;
+	while ((ret = read(fd1, buf, 99)) > 0)
+	{
+		buf[ret] = 0;
+		printf("read: %zd - %s\n", ret, buf);
+	}
+	printf("SYS Ret: %zd, errno: %d\n", ret, errno);
+	errno = 0;
+	while ((ret = ft_read(fd2, buf, 99)) > 0)
+	{
+		buf[ret] = 0;
+		printf("ft_read: %zd - %s\n", ret, buf);
+	}
+	printf("FT  Ret: %zd, errno: %d\n\n", ret, errno);
+	close(fd1);
+	close(fd2);
+
+
+	errno = 0;
+	while ((ret = read(-1, buf, 99)) > 0)
+	{
+		buf[ret] = 0;
+		printf("read: %zd - %s\n", ret, buf);
+	}
+	printf("SYS Ret: %zd, errno: %d\n", ret, errno);
+	errno = 0;
+	while ((ret = ft_read(-1, buf, 99)) > 0)
+	{
+		buf[ret] = 0;
+		printf("ft_read: %zd - %s\n", ret, buf);
+	}
+	printf("FT  Ret: %zd, errno: %d\n\n", ret, errno);
+
+
+	errno = 0;
+	while ((ret = read(0, buf, 99)) > 0)
+	{
+		buf[ret] = 0;
+		printf("read: %zd - %s\n", ret, buf);
+	}
+	printf("SYS Ret: %zd, errno: %d\n", ret, errno);
+	errno = 0;
+	while ((ret = ft_read(0, buf, 99)) > 0)
+	{
+		buf[ret] = 0;
+		printf("ft_read: %zd - %s\n", ret, buf);
+	}
+	printf("FT  Ret: %zd, errno: %d\n\n", ret, errno);
+	printf("-------------END-------------\n\n\n\n\n\n");
 }
 
-void check_read()
+void	test_dup()
 {
-	int fd = open("main.c", O_RDONLY);
-	char buff1[891];
-	int ret = 1;
-	printf("\n================================\n");
-	printf("========== FT_READ =============\n");
-	printf("================================\n\n");
-	printf("%-20s: \n", "header main.c | libc ");
-	ret = read(fd, buff1, 890);
-	buff1[ret] = 0;
-	printf("[return : %d]\n|%s|\n", ret, buff1);
-	printf("\n");
-	close(fd);
-	fd = open("main.c", O_RDONLY);
-	clear_buffer(buff1, 891);
-	printf("%-20s: \n", "header main.c | libasm ");
-	ret = ft_read(fd, buff1, 890);
-	buff1[ret] = 0;
-	printf("[return : %d]\n|%s|\n", ret, buff1);
-	printf("\n");
-	clear_buffer(buff1, 891);
-	close(fd);
+	printf("-------FT_STRDUP TESTING-------\n");
+	char	*src1 = "test";
+	char	*src2 = "";
+	char	*src3 = FT_LLSTR;
+	char	*lol;
 
-	fd = open("test", O_RDONLY);
-	printf("%-20s: \n", "file test | libc ");
-	ret = read(fd, buff1, 890);
-	buff1[ret] = 0;
-	printf("[return : %d]\n|%s|\n", ret, buff1);
-	printf("\n");
-	close(fd);
-	fd = open("test", O_RDONLY);
-	clear_buffer(buff1, 891);
-	printf("%-20s: \n", "file test | libasm ");
-	ret = ft_read(fd, buff1, 890);
-	buff1[ret] = 0;
-	printf("[return : %d]\n|%s|\n", ret, buff1);
-	printf("\n");
-	clear_buffer(buff1, 891);
-	close(fd);
+	printf("orig:\n%s\n", src1);
+	lol = strdup(src1);
+	free(lol);
+	printf(" SYS:\n%s\n", lol);
+	lol = ft_strdup(src1);
+	free(lol);
+	printf("  FT:\n%s\n\n", lol);
 
-	fd = open("wrong", O_RDONLY);
-	printf("%-20s: \n", "wrong | libc ");
-	ret = read(fd, buff1, 890);
-	buff1[ret] = 0;
-	printf("[return : %d]\n|%s|\n", ret, buff1);
-	printf("\n");
-	close(fd);
-	fd = open("wrong", O_RDONLY);
-	clear_buffer(buff1, 891);
-	printf("%-20s: \n", "wrong | libasm ");
-	ret = ft_read(fd, buff1, 890);
-	buff1[ret] = 0;
-	printf("[return : %d]\n|%s|\n", ret, buff1);
-	printf("\n");
-	clear_buffer(buff1, 891);
-	close(fd);
+	printf("orig:\n%s\n", src2);
+	lol = strdup(src2);
+	free(lol);
+	printf(" SYS:\n%s\n", lol);
+	lol = ft_strdup(src2);
+	free(lol);
+	printf("  FT:\n%s\n\n", lol);
+
+	printf("orig:\n%s\n", src3);
+	lol = strdup(src3);
+	free(lol);
+	printf(" SYS:\n%s\n", lol);
+	lol = ft_strdup(src3);
+	free(lol);
+	printf("  FT:\n%s\n\n", lol);
+	printf("--------------END--------------\n");
 }
 
-void check_strdup()
+int		main()
 {
-	char *hello_world = "Hello world !";
-	char *empty = "";
-	char *save;
-	char *save2;
-	
-	printf("\n================================\n");
-	printf("========== FT_STRDUP ===========\n");
-	printf("================================\n\n");
-	printf("%-20s: \"%s\"\n", "char *", hello_world);
-	save = strdup(hello_world);
-	printf("%-20s: \"%s\"\n", "libc", save);
-	free(save);
-	save = NULL;
-	save2 = ft_strdup(hello_world);
-	printf("%-20s: \"%s\"\n", "libasm", save2);
-	free(save2);
-	save2 = NULL;
-	printf("\n");
-
-	printf("%-20s: \"%s\"\n", "char *", empty);
-	save = strdup(empty);
-	printf("%-20s: \"%s\"\n", "libc", save);
-	free(save);
-	save = NULL;
-	save2 = ft_strdup(empty);
-	printf("%-20s: \"%s\"\n", "libasm", save2);
-	free(save2);
-	save2 = NULL;
-	printf("\n");
-
-	// ------- NULL = SEGFAULT
-	// printf("%-20s: NULL\n", "char *");
-	// save = strdup(NULL);
-	// printf("%-20s: \"%s\"\n", "libc", save);
-	// free(save);
-	// save = NULL;
-	// save2 = ft_strdup(NULL);
-	// printf("%-20s: \"%s\"\n", "libasm", save2);
-	// free(save2);
-	// save2 = NULL;
-	// printf("\n");
-}
-
-int main()
-{
-	check_strlen();
-	check_strcpy();
-	check_strcmp();
-	check_write();
-	check_read();
-	check_strdup();
+	test_len();
+	test_cpy();
+	test_cmp();
+	test_write();
+	test_read();
+	test_dup();
 }
