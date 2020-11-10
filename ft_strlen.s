@@ -1,4 +1,5 @@
 ;вычисляет длину строки до '\0', возвращет счетчик
+;size_t strlen(const char *s)
 
 section .text
 	global _ft_strlen
@@ -7,7 +8,6 @@ section .text
 
 _ft_strlen:
 	mov 	rax, 0
-	jmp 	count
 
 count:
 	cmp 	BYTE [rdi + rax], 0 	; if the byte at rdi(arg0 = string) start + rax (count/return value) equal 0
